@@ -4,7 +4,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+
+const page = usePage();
 
 const form = useForm({
     name: '',
@@ -28,6 +30,7 @@ const submit = () => {
 
 <template>
     <GuestLayout>
+
         <Head title="Register" />
 
         <form @submit.prevent="submit">
@@ -36,15 +39,8 @@ const submit = () => {
                 <div class="col-6">
                     <InputLabel for="name" value="Name" />
 
-                    <TextInput
-                        id="name"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.name"
-                        required
-                        autofocus
-                        autocomplete="name"
-                    />
+                    <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus
+                        autocomplete="name" />
 
                     <InputError class="mt-2" :message="form.errors.name" />
                 </div>
@@ -52,15 +48,8 @@ const submit = () => {
                 <div class="col-6">
                     <InputLabel for="last_name" value="Last Name" />
 
-                    <TextInput
-                        id="last_name"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.last_name"
-                        required
-                        autofocus
-                        autocomplete="last_name"
-                    />
+                    <TextInput id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" required
+                        autofocus autocomplete="last_name" />
 
                     <InputError class="mt-2" :message="form.errors.last_name" />
                 </div>
@@ -69,14 +58,8 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="address" value="Address" />
 
-                <TextInput
-                    id="address"
-                    type="text"
-                    class="mt-1 block w-full"
-                    v-model="form.address"
-                    autofocus
-                    autocomplete="address"
-                />
+                <TextInput id="address" type="text" class="mt-1 block w-full" v-model="form.address" autofocus
+                    autocomplete="address" />
 
                 <InputError class="mt-2" :message="form.errors.address" />
             </div>
@@ -85,14 +68,8 @@ const submit = () => {
                 <div class="col-6">
                     <InputLabel for="zip_code" value="Zip Code" />
 
-                    <TextInput
-                        id="zip_code"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.zip_code"
-                        autofocus
-                        autocomplete="zip_code"
-                    />
+                    <TextInput id="zip_code" type="text" class="mt-1 block w-full" v-model="form.zip_code" autofocus
+                        autocomplete="zip_code" />
 
                     <InputError class="mt-2" :message="form.errors.zip_code" />
                 </div>
@@ -100,14 +77,8 @@ const submit = () => {
                 <div class="col-6">
                     <InputLabel for="city" value="City" />
 
-                    <TextInput
-                        id="city"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.city"
-                        autofocus
-                        autocomplete="city"
-                    />
+                    <TextInput id="city" type="text" class="mt-1 block w-full" v-model="form.city" autofocus
+                        autocomplete="city" />
 
                     <InputError class="mt-2" :message="form.errors.city" />
                 </div>
@@ -117,14 +88,8 @@ const submit = () => {
                 <div class="col-6">
                     <InputLabel for="state" value="State" />
 
-                    <TextInput
-                        id="state"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.state"
-                        autofocus
-                        autocomplete="state"
-                    />
+                    <TextInput id="state" type="text" class="mt-1 block w-full" v-model="form.state" autofocus
+                        autocomplete="state" />
 
                     <InputError class="mt-2" :message="form.errors.state" />
                 </div>
@@ -132,15 +97,12 @@ const submit = () => {
                 <div class="col-6">
                     <InputLabel for="country" value="Country" />
 
-                    <TextInput
-                        id="country"
-                        type="text"
-                        class="mt-1 block w-full"
-                        v-model="form.country"
-                        autofocus
-                        required
-                        autocomplete="country"
-                    />
+                    <select id="country" class="mt-1 form-control" v-model="form.country" autofocus required
+                        autocomplete="country" style="height: 42px;">
+                        <option v-for="country in page.props.countries" :key="country.id" :value="country.name">
+                            {{ country.name }}
+                        </option>
+                    </select>
 
                     <InputError class="mt-2" :message="form.errors.country" />
                 </div>
@@ -149,14 +111,8 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="email" value="Email" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autocomplete="username"
-                />
+                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
+                    autocomplete="username" />
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
@@ -164,14 +120,8 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="password" value="Password" />
 
-                <TextInput
-                    id="password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required
+                    autocomplete="new-password" />
 
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
@@ -179,24 +129,16 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="password_confirmation" value="Confirm Password" />
 
-                <TextInput
-                    id="password_confirmation"
-                    type="password"
-                    class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
-                    required
-                    autocomplete="new-password"
-                />
+                <TextInput id="password_confirmation" type="password" class="mt-1 block w-full"
+                    v-model="form.password_confirmation" required autocomplete="new-password" />
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <Link
-                    :href="route('login')"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    Already registered?
+                <Link :href="route('login')"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Already registered?
                 </Link>
 
                 <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

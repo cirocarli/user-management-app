@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
 use App\Models\UserMeta;
+use App\Models\Countries;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminUsersController extends Controller
@@ -22,7 +23,8 @@ class AdminUsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user_meta = UserMeta::where('user_id', $id)->firstOrFail();
-        return Inertia::render('Admin/Update', compact(['user', 'user_meta']));
+        $countries = Countries::orderBy('id', 'asc')->get();
+        return Inertia::render('Admin/Update', compact(['user', 'user_meta', 'countries']));
     }
 
     public function update(Request $request, $id)

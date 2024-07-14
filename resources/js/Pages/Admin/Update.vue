@@ -1,8 +1,9 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { Head, usePage, useForm } from '@inertiajs/vue3';
-import { reactive } from 'vue';
-import axios from 'axios';
 
 const page = usePage();
 const formData = useForm({
@@ -35,64 +36,60 @@ const formData = useForm({
                         <form @submit.prevent="formData.patch(route('admin.users.update', page.props.user.id))">
                             <div class="row pt-4">
                                 <div class="col-6">
-                                    <span>Name</span>
-                                    <label for="name" value="Name" class="form-label" />
-                                    <input id="name" type="text" class="form-control" v-model="formData.name"
+                                    <InputLabel for="name" value="Name" class="form-label" />
+                                    <TextInput id="name" type="text" class="form-control" v-model="formData.name"
                                         required autofocus autocomplete="name" />
                                     <InputError class="mt-2" :message="formData.errors.name" />
                                 </div>
 
                                 <div class="col-6">
-                                    <span>Last name</span>
-                                    <label for="last_name" value="Last Name" class="form-label" />
-                                    <input id="last_name" type="text" class="form-control"
+                                    <InputLabel for="last_name" value="Last Name" class="form-label" />
+                                    <TextInput id="last_name" type="text" class="form-control"
                                         v-model="formData.last_name" required autofocus autocomplete="last_name" />
                                     <InputError class="mt-2" :message="formData.errors.last_name" />
                                 </div>
                             </div>
                             <div class="mt-4">
-                                <span>Address</span>
-                                <label for="address" value="Address" class="form-label" />
-                                <input id="address" type="text" class="form-control" v-model="formData.address"
+                                <InputLabel for="address" value="Address" class="form-label" />
+                                <TextInput id="address" type="text" class="form-control" v-model="formData.address"
                                     autofocus autocomplete="address" />
                                 <InputError class="mt-2" :message="formData.errors.address" />
                             </div>
                             <div class="row mt-4">
                                 <div class="col-6">
-                                    <span>Zip Code</span>
-                                    <label for="zip_code" value="Zip Code" class="form-label" />
-                                    <input id="zip_code" type="text" class="form-control"
+                                    <InputLabel for="zip_code" value="Zip Code" class="form-label" />
+                                    <TextInput id="zip_code" type="text" class="form-control"
                                         v-model="formData.zip_code" autofocus autocomplete="zip_code" />
                                     <InputError class="mt-2" :message="formData.errors.zip_code" />
                                 </div>
                                 <div class="col-6">
-                                    <span>City</span>
-                                    <label for="city" value="City" class="form-label" />
-                                    <input id="city" type="text" class="form-control" v-model="formData.city"
+                                    <InputLabel for="city" value="City" class="form-label" />
+                                    <TextInput id="city" type="text" class="form-control" v-model="formData.city"
                                         autofocus autocomplete="city" />
                                     <InputError class="mt-2" :message="formData.errors.city" />
                                 </div>
                             </div>
                             <div class="row mt-4">
                                 <div class="col-6">
-                                    <span>State</span>
-                                    <label for="state" value="State" class="form-label" />
-                                    <input id="state" type="text" class="form-control" v-model="formData.state"
+                                    <InputLabel for="state" value="State" class="form-label" />
+                                    <TextInput id="state" type="text" class="form-control" v-model="formData.state"
                                         autofocus autocomplete="state" />
                                     <InputError class="mt-2" :message="formData.errors.state" />
                                 </div>
                                 <div class="col-6">
-                                    <span>Country</span>
-                                    <label for="country" value="Country" class="form-label" />
-                                    <input id="country" type="text" class="form-control" v-model="formData.country"
-                                        autofocus required autocomplete="country" />
+                                    <InputLabel for="country" value="Country" class="form-label" />
+                                    <select id="country" class="form-control" v-model="formData.country" autofocus required
+                                        autocomplete="country" style="height: 42px;">
+                                        <option v-for="country in page.props.countries" :key="country.id" :value="country.name">
+                                            {{ country.name }}
+                                        </option>
+                                    </select>
                                     <InputError class="mt-2" :message="formData.errors.country" />
                                 </div>
                             </div>
                             <div class="mt-4">
-                                <span>Email</span>
-                                <label for="email" value="Email" class="form-label" />
-                                <input id="email" type="email" class="form-control" v-model="formData.email"
+                                <InputLabel for="email" value="Email" class="form-label" />
+                                <TextInput id="email" type="email" class="form-control" v-model="formData.email"
                                     required autocomplete="username" />
                                 <InputError class="mt-2" :message="formData.errors.email" />
                             </div>

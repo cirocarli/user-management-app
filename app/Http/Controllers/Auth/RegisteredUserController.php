@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Countries;
 use App\Models\User;
 use App\Models\UserMeta;
 use Illuminate\Auth\Events\Registered;
@@ -21,7 +22,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Auth/Register');
+        $countries = Countries::orderBy('id', 'asc')->get();
+        return Inertia::render('Auth/Register', compact(['countries']));
     }
 
     /**
